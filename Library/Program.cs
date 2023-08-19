@@ -7,8 +7,6 @@ using Serilog;
 
 var builder = WebApplication.CreateBuilder(args);
 
-// Add services to the container.
-
 builder.Services.AddControllers();
 
 builder.Services.AddScoped<IBookDal, EfBookDal>();
@@ -17,13 +15,13 @@ builder.Services.AddScoped<IBookService, BookManager>();
 builder.Services.AddScoped<IAuthorService, AuthorManager>();
 builder.Services.AddDbContext<BookContext>(ServiceLifetime.Singleton);
 
+// TODO: service register move to extension.
 
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 
 var app = builder.Build();
 
-// Configure the HTTP request pipeline.
 if (app.Environment.IsDevelopment())
 {
     app.UseSwagger();
